@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Samriddhi Solves MCQ — Fun quiz game for kids. Pick a subject and solve MCQs with a timer!" />
+    <title>Samriddhi Solves MCQ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- Home: Subject selection -->
+      <header class="site-header">
+        <div class="container header-inner">
+          <div class="brand">
+            <span class="brand-icon" aria-hidden="true">📚</span>
+            <span class="brand-name">Samriddhi Solves MCQ</span>
+          </div>
+        </div>
+      </header>
+
+      <main id="main" class="site-main">
+        <!-- Screen 1: Pick a subject -->
+        <section id="screen-subjects" class="screen screen-subjects">
+          <div class="container">
+            <h1 class="game-title">Pick a subject and start the quiz!</h1>
+            <p class="game-subtitle">Each correct answer gives you points. Wrong answer = 0. Beat the timer!</p>
+            <div class="subject-grid" id="subjectGrid">
+              <button type="button" class="subject-card" data-subject="english" aria-label="Play English quiz">
+                <span class="subject-icon">📖</span>
+                <span class="subject-name">English</span>
+              </button>
+              <button type="button" class="subject-card" data-subject="hindi" aria-label="Play Hindi quiz">
+                <span class="subject-icon">🪷</span>
+                <span class="subject-name">Hindi</span>
+              </button>
+              <button type="button" class="subject-card" data-subject="mathematics" aria-label="Play Mathematics quiz">
+                <span class="subject-icon">🔢</span>
+                <span class="subject-name">Mathematics</span>
+              </button>
+              <button type="button" class="subject-card" data-subject="science" aria-label="Play Science quiz">
+                <span class="subject-icon">🔬</span>
+                <span class="subject-name">Science</span>
+              </button>
+              <button type="button" class="subject-card" data-subject="evs" aria-label="Play EVS quiz">
+                <span class="subject-icon">🌍</span>
+                <span class="subject-name">EVS</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Screen 2: Quiz (MCQ + timer) -->
+        <section id="screen-quiz" class="screen screen-quiz" hidden>
+          <div class="container quiz-container">
+            <div class="quiz-top">
+              <div class="quiz-meta">
+                <span class="quiz-subject-name" id="quizSubjectName">Subject</span>
+                <span class="quiz-progress" id="quizProgress">Question 1 of 8</span>
+              </div>
+              <div class="quiz-stats">
+                <span class="stat score" id="quizScore">Score: 0</span>
+                <span class="stat timer" id="quizTimer">30</span>
+              </div>
+            </div>
+            <div class="question-card">
+              <h2 class="question-text" id="questionText">Question text will appear here.</h2>
+              <div class="options-list" id="optionsList" role="list">
+                <!-- Options injected by JS -->
+              </div>
+            </div>
+            <div class="quiz-actions">
+              <button type="button" class="btn btn-ghost" id="btnBackToSubjects">← Back to subjects</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Screen 3: Results -->
+        <section id="screen-results" class="screen screen-results" hidden>
+          <div class="container results-container">
+            <div class="results-card">
+              <h1 class="results-title">Quiz complete!</h1>
+              <p class="results-subject" id="resultsSubject">English</p>
+              <div class="results-score-wrap">
+                <span class="results-score-label">Your score</span>
+                <span class="results-score-value" id="resultsScore">0</span>
+                <span class="results-score-max" id="resultsMax">/ 80</span>
+              </div>
+              <p class="results-message" id="resultsMessage">Great job!</p>
+              <div class="results-actions">
+                <button type="button" class="btn btn-primary" id="btnPlayAgain">Play again (same subject)</button>
+                <button type="button" class="btn btn-ghost" id="btnPickAnother">Pick another subject</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="container footer-inner">
+          <p>© <span id="year"></span> Samriddhi Solves MCQ — Learn and have fun!</p>
+        </div>
+      </footer>
+    </div>
+
+    <script src="./quiz-data.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>
