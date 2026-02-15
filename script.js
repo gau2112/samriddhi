@@ -18,16 +18,25 @@
     hindi: "Hindi",
     mathematics: "Mathematics",
     science: "Science",
-    evs: "EVS"
+    evs: "EVS",
+    gk: "General Knowledge"
   };
+
+  // GK: 10, 15, 20 questions. Others: 5, 10, 15 questions.
+  const COUNT_OPTIONS = { gk: [10, 15, 20], default: [5, 10, 15] };
 
   const screens = {
     subjects: document.getElementById("screen-subjects"),
+    options: document.getElementById("screen-options"),
     quiz: document.getElementById("screen-quiz"),
     results: document.getElementById("screen-results")
   };
 
   const subjectGrid = document.getElementById("subjectGrid");
+  const optionsSubjectName = document.getElementById("optionsSubjectName");
+  const questionCountButtons = document.getElementById("questionCountButtons");
+  const btnStartQuiz = document.getElementById("btnStartQuiz");
+  const btnOptionsBack = document.getElementById("btnOptionsBack");
   const quizSubjectName = document.getElementById("quizSubjectName");
   const quizProgress = document.getElementById("quizProgress");
   const quizScore = document.getElementById("quizScore");
@@ -44,6 +53,7 @@
 
   let state = {
     subject: null,
+    questionCount: null,
     questions: [],
     currentIndex: 0,
     score: 0,
@@ -54,19 +64,65 @@
 
   function showScreen(name) {
     Object.keys(screens).forEach(function (key) {
-      screens[key].hidden = key !== name;
+      if (screens[key]) screens[key].hidden = key !== name;
     });
   }
 
-  function startQuiz(subjectKey) {
-    const questions = (data[subjectKey] || []).slice();
-    if (questions.length === 0) {
+  function getCountOptions(subjectKey) {
+    return COUNT_OPTIONS[subjectKey] || COUNT_OPTIONS.default;
+  }
+
+  function shuffleArray(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i];
+      a[i] = a[j];
+      a[j] = t;
+    }
+    return a;
+  }
+
+  function showOptionsScreen(subjectKey) {
+    state.subject = subjectKey;
+    var counts = getCountOptions(subjectKey);
+    var available = (data[subjectKey] || []).length;
+    if (available === 0) {
       alert("No questions available for this subject.");
       return;
     }
+    state.questionCount = Math.min(counts[0], available);
+    if (optionsSubjectName) optionsSubjectName.textContent = subjectLabels[subjectKey] || subjectKey;
+    questionCountButtons.innerHTML = "";
+    counts.forEach(function (count) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "count-btn";
+      btn.textContent = String(count);
+      btn.dataset.count = String(count);
+      if (count === state.questionCount) btn.classList.add("selected");
+      btn.addEventListener("click", function () {
+        state.questionCount = Number(btn.dataset.count);
+        questionCountButtons.querySelectorAll(".count-btn").forEach(function (b) { b.classList.remove("selected"); });
+        btn.classList.add("selected");
+      });
+      questionCountButtons.appendChild(btn);
+    });
+    showScreen("options");
+  }
+
+  function startQuiz(subjectKey, questionCount) {
+    var raw = (data[subjectKey] || []).slice();
+    if (raw.length === 0) {
+      alert("No questions available for this subject.");
+      return;
+    }
+    var n = Math.min(questionCount || raw.length, raw.length);
+    var questions = shuffleArray(raw).slice(0, n);
 
     state = {
       subject: subjectKey,
+      questionCount: n,
       questions: questions,
       currentIndex: 0,
       score: 0,
@@ -79,6 +135,11 @@
     updateScoreDisplay();
     showScreen("quiz");
     runQuestion();
+  }
+
+  function startQuizFromOptions() {
+    if (state.subject == null || state.questionCount == null) return;
+    startQuiz(state.subject, state.questionCount);
   }
 
   function clearTimer() {
@@ -235,11 +296,19 @@
   // Event listeners
   if (subjectGrid) {
     subjectGrid.addEventListener("click", function (e) {
-      const card = e.target.closest(".subject-card");
+      var card = e.target.closest(".subject-card");
       if (!card) return;
-      const subject = card.getAttribute("data-subject");
-      if (subject) startQuiz(subject);
+      var subject = card.getAttribute("data-subject");
+      if (subject) showOptionsScreen(subject);
     });
+  }
+
+  if (btnOptionsBack) {
+    btnOptionsBack.addEventListener("click", goBackToSubjects);
+  }
+
+  if (btnStartQuiz) {
+    btnStartQuiz.addEventListener("click", startQuizFromOptions);
   }
 
   if (btnBackToSubjects) {
@@ -248,7 +317,11 @@
 
   if (btnPlayAgain) {
     btnPlayAgain.addEventListener("click", function () {
-      if (state.subject) startQuiz(state.subject);
+      if (state.subject != null && state.questionCount != null) {
+        startQuiz(state.subject, state.questionCount);
+      } else {
+        showOptionsScreen(state.subject);
+      }
     });
   }
 
