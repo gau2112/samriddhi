@@ -6,6 +6,8 @@
   const POINTS_PER_CORRECT = 10;
   const SECONDS_PER_QUESTION = 30;
   const FEEDBACK_DELAY_MS = 1200;
+  const CLAP_SOUND_PATH = "sounds/Claprecord.m4a";
+  const CLAP_WRONG_PATH = "sounds/WrongAnswer.m4a";
 
   const data = window.SAMRIDDHI_QUIZ_DATA;
   if (!data) {
@@ -192,6 +194,49 @@
     return state.questions.length * POINTS_PER_CORRECT;
   }
 
+  function playCorrectSound() {
+    try {
+      var audio = new Audio(CLAP_SOUND_PATH);
+      audio.volume = 0.7;
+      audio.play().catch(function () {
+        playFallbackBeep();
+      });
+    } catch (e) {
+      playFallbackBeep();
+    }
+  }
+
+  function playWrongAnswerSound(){
+    try {
+      var audio = new Audio(CLAP_WRONG_PATH);
+      audio.volume = 0.7;
+      audio.play().catch(function () {
+        playFallbackBeep();
+      });
+    } catch (e) {
+      playFallbackBeep();
+    }
+
+  }
+
+  function playFallbackBeep() {
+    try {
+      var C = window.AudioContext || window.webkitAudioContext;
+      if (!C) return;
+      var ctx = new C();
+      var osc = ctx.createOscillator();
+      var gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.frequency.value = 523;
+      osc.type = "sine";
+      gain.gain.setValueAtTime(0.15, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.15);
+    } catch (e) {}
+  }
+
   function runQuestion() {
     const q = state.questions[state.currentIndex];
     if (!q) {
@@ -233,6 +278,11 @@
     if (correct) {
       state.score += POINTS_PER_CORRECT;
       updateScoreDisplay();
+      playCorrectSound();
+    }
+    else{
+      //Answer is wrong
+      playWrongAnswerSound();
     }
 
     highlightOptions(clickedIndex, q.correctIndex, correct);
