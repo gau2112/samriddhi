@@ -212,5 +212,132 @@ window.SAMRIDDHI_QUIZ_DATA = {
       options: ["Horse", "Camel", "Elephant", "Donkey"],
       correctIndex: 1
     }
+  ],
+  gk: [
+    {
+      question: "What is the capital of India?",
+      options: ["Mumbai", "Kolkata", "New Delhi", "Chennai"],
+      correctIndex: 2
+    },
+    {
+      question: "How many days are there in a leap year?",
+      options: ["364", "365", "366", "367"],
+      correctIndex: 2
+    },
+    {
+      question: "Which is the largest ocean on Earth?",
+      options: ["Atlantic", "Indian", "Pacific", "Arctic"],
+      correctIndex: 2
+    },
+    {
+      question: "Who wrote the national anthem of India?",
+      options: ["Mahatma Gandhi", "Rabindranath Tagore", "Jawaharlal Nehru", "Sarojini Naidu"],
+      correctIndex: 1
+    },
+    {
+      question: "How many continents are there in the world?",
+      options: ["5", "6", "7", "8"],
+      correctIndex: 2
+    },
+    {
+      question: "Which festival is known as the festival of lights?",
+      options: ["Holi", "Diwali", "Eid", "Christmas"],
+      correctIndex: 1
+    },
+    {
+      question: "What is the national animal of India?",
+      options: ["Lion", "Tiger", "Elephant", "Peacock"],
+      correctIndex: 1
+    },
+    {
+      question: "Which planet is known as the Red Planet?",
+      options: ["Venus", "Mars", "Jupiter", "Saturn"],
+      correctIndex: 1
+    },
+    {
+      question: "How many sides does a triangle have?",
+      options: ["2", "3", "4", "5"],
+      correctIndex: 1
+    },
+    {
+      question: "What is the capital of France?",
+      options: ["London", "Berlin", "Paris", "Madrid"],
+      correctIndex: 2
+    },
+    {
+      question: "Which is the longest river in India?",
+      options: ["Yamuna", "Ganga", "Brahmaputra", "Godavari"],
+      correctIndex: 1
+    },
+    {
+      question: "In which year did India gain independence?",
+      options: ["1945", "1946", "1947", "1948"],
+      correctIndex: 2
+    },
+    {
+      question: "What is the national bird of India?",
+      options: ["Sparrow", "Peacock", "Parrot", "Crow"],
+      correctIndex: 1
+    },
+    {
+      question: "Which is the smallest continent?",
+      options: ["Europe", "Antarctica", "Australia", "South America"],
+      correctIndex: 2
+    },
+    {
+      question: "How many colours are there in the Indian national flag?",
+      options: ["2", "3", "4", "5"],
+      correctIndex: 2
+    },
+    {
+      question: "Which fruit is known as the 'king of fruits' in India?",
+      options: ["Apple", "Banana", "Mango", "Orange"],
+      correctIndex: 2
+    },
+    {
+      question: "What is the largest mammal on Earth?",
+      options: ["Elephant", "Blue whale", "Giraffe", "Polar bear"],
+      correctIndex: 1
+    },
+    {
+      question: "Which country is called the Land of the Rising Sun?",
+      options: ["China", "Korea", "Japan", "Thailand"],
+      correctIndex: 2
+    },
+    {
+      question: "How many months have 31 days?",
+      options: ["5", "6", "7", "8"],
+      correctIndex: 2
+    },
+    {
+      question: "What is the capital of Japan?",
+      options: ["Seoul", "Beijing", "Tokyo", "Bangkok"],
+      correctIndex: 2
+    },
+    {
+      question: "Which is the largest desert in the world?",
+      options: ["Thar", "Sahara", "Antarctica", "Gobi"],
+      correctIndex: 2
+    },
+    {
+      question: "How many zeros are there in one lakh?",
+      options: ["4", "5", "6", "7"],
+      correctIndex: 1
+    },
+    {
+      question: "Which festival is celebrated with colours?",
+      options: ["Diwali", "Holi", "Eid", "Christmas"],
+      correctIndex: 1
+    },
+    {
+      question: "What is the national flower of India?",
+      options: ["Rose", "Lotus", "Sunflower", "Jasmine"],
+      correctIndex: 1
+    },
+    {
+      question: "Which is the largest state in India by area?",
+      options: ["Maharashtra", "Madhya Pradesh", "Rajasthan", "Uttar Pradesh"],
+      correctIndex: 2
+    }
   ]
 };
