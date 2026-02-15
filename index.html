@@ -52,11 +52,30 @@
                 <span class="subject-icon">🌍</span>
                 <span class="subject-name">EVS</span>
               </button>
+              <button type="button" class="subject-card" data-subject="gk" aria-label="Play General Knowledge quiz">
+                <span class="subject-icon">💡</span>
+                <span class="subject-name">GK</span>
+              </button>
             </div>
           </div>
         </section>
 
-        <!-- Screen 2: Quiz (MCQ + timer) -->
+        <!-- Screen 2: Choose number of questions -->
+        <section id="screen-options" class="screen screen-options" hidden>
+          <div class="container options-container">
+            <h1 class="options-title">How many questions?</h1>
+            <p class="options-subject" id="optionsSubjectName">Subject</p>
+            <div class="question-count-buttons" id="questionCountButtons">
+              <!-- Filled by JS: 5/10/15 or 10/15/20 for GK -->
+            </div>
+            <div class="options-actions">
+              <button type="button" class="btn btn-primary" id="btnStartQuiz">Start quiz</button>
+              <button type="button" class="btn btn-ghost" id="btnOptionsBack">← Back to subjects</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Screen 3: Quiz (MCQ + timer) -->
         <section id="screen-quiz" class="screen screen-quiz" hidden>
           <div class="container quiz-container">
             <div class="quiz-top">
@@ -81,7 +100,7 @@
           </div>
         </section>
 
-        <!-- Screen 3: Results -->
+        <!-- Screen 4: Results -->
         <section id="screen-results" class="screen screen-results" hidden>
           <div class="container results-container">
             <div class="results-card">
